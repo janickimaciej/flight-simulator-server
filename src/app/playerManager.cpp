@@ -127,4 +127,4 @@ namespace App
 		m_idCounter = (m_idCounter + 1) % static_cast<int>(Common::maxPlayerCount);
 		return availableId;
 	}
-};
+}

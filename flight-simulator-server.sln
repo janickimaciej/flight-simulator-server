@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plane-opengl-server", "plane-opengl-server.vcxproj", "{3CC94877-8CDE-4BA5-87AD-9162B081AE41}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flight-simulator-server", "flight-simulator-server.vcxproj", "{3CC94877-8CDE-4BA5-87AD-9162B081AE41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,7 +11,7 @@ namespace App
 {
 	bool parseArguments(int argc, char** argv, Common::MapName& mapName, int& networkThreadPort,
 		int& physicsThreadPort);
-};
+}
 
 int main(int argc, char** argv)
 {
@@ -68,4 +68,4 @@ namespace App
 
 		return true;
 	}
-};
+}

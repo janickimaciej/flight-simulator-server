@@ -34,4 +34,4 @@ namespace App
 
 		std::optional<int> getAvailableId();
 	};
-};
+}

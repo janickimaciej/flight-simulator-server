@@ -12,4 +12,4 @@ namespace App
 		Physics::Timestep keepAliveTimestep{};
 		bool keepAliveLock{};
 	};
-};
+}

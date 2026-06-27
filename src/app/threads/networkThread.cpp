@@ -144,4 +144,4 @@ namespace App
 			clientTimestamp, timestep, playerId, playerInput);
 		m_playerManager.bumpPlayer(playerId, m_simulationClock.getTime());
 	}
-};
+}

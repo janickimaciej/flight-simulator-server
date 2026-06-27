@@ -9,4 +9,4 @@ namespace App
 	};
 
 	int toInt(ExitCode exitCode);
-};
+}

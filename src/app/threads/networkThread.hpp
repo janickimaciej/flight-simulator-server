@@ -43,4 +43,4 @@ namespace App
 			const Physics::Timestep& timestep, int playerId,
 			const Physics::PlayerInput& playerInput);
 	};
-};
+}

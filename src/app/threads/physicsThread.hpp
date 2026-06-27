@@ -36,4 +36,4 @@ namespace App
 		void mainLoop(const Physics::Timestep& initialTimestep);
 		void sleepIfFuture(const Physics::Timestep& timestep);
 	};
-};
+}

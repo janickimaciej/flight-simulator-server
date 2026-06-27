@@ -6,4 +6,4 @@ namespace App
 	{
 		return static_cast<std::size_t>(commandLineArgument);
 	}
-};
+}
