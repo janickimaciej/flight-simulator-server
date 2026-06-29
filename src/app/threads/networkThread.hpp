@@ -1,23 +1,20 @@
 #pragma once
 
+#include "app/commandLineArgs.hpp"
 #include "app/exitSignal.hpp"
 #include "app/playerManager.hpp"
 #include "app/udp/udpCommunication.hpp"
-#include "common/mapName.hpp"
 #include "physics/notification.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/spawner.hpp"
-
-#include <unordered_map>
 
 namespace App
 {
 	class NetworkThread
 	{
 	public:
-		NetworkThread(ExitSignal& exitSignal, Common::MapName mapName, int networkThreadPort,
-			int physicsThreadPort);
+		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args);
 		void start();
 
 	private:

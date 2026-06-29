@@ -1,42 +1,26 @@
 #include "app/threads/networkThread.hpp"
 
-#include "app/exitCode.hpp"
-#include "app/exitSignal.hpp"
 #include "app/threads/physicsThread.hpp"
-#include "app/udp/udpCommunication.hpp"
 #include "app/udp/udpFrameType.hpp"
 #include "common/airplaneTypeName.hpp"
-#include "common/config.hpp"
-#include "common/mapName.hpp"
 #include "common/terrains/maps/maps.hpp"
 #include "physics/airplaneDefinitions.hpp"
-#include "physics/notification.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
-#include "physics/simulationBuffer.hpp"
-#include "physics/simulationClock.hpp"
 #include "physics/timestamp.hpp"
 
 #include <asio/asio.hpp>
 
-#include <atomic>
-#include <memory>
 #include <optional>
-#include <semaphore>
-#include <string>
-#include <thread>
-#include <unordered_map>
-#include <utility>
 #include <vector>
 
 namespace App
 {
-	NetworkThread::NetworkThread(ExitSignal& exitSignal, Common::MapName mapName,
-		int networkThreadPort, int physicsThreadPort) :
+	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args) :
 		m_exitSignal{exitSignal},
-		m_simulationBuffer{-1, mapName},
-		m_spawner{*Common::Terrains::maps[toSizeT(mapName)]},
-		m_udpCommunication{networkThreadPort, physicsThreadPort}
+		m_simulationBuffer{-1, args.mapName},
+		m_spawner{*Common::Terrains::maps[toSizeT(args.mapName)]},
+		m_udpCommunication{args.networkThreadPort, args.physicsThreadPort}
 	{ }
 
 	void NetworkThread::start()
@@ -64,7 +48,7 @@ namespace App
 
 			bool received = m_udpCommunication.receiveInitReqOrControlFrame(endpoint,
 				clientTimestamp, udpFrameType, airplaneTypeName, timestep, playerId, playerInput);
-			
+
 			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
 				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
 			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
@@ -91,7 +75,7 @@ namespace App
 
 	void NetworkThread::kickPlayers()
 	{
-		Physics::Timestep timestep = m_simulationClock.getTime();	
+		Physics::Timestep timestep = m_simulationClock.getTime();
 		std::vector<int> kickedPlayers = m_playerManager.kickPlayers(timestep);
 		if (!kickedPlayers.empty())
 		{

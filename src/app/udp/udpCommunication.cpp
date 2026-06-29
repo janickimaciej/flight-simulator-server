@@ -116,7 +116,7 @@ namespace App
 	{
 		std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
 		std::chrono::steady_clock::time_point expiration = now + timeout;
-		
+
 		static std::vector<std::uint8_t> buffer(maxFrameSize);
 		while (now < expiration)
 		{

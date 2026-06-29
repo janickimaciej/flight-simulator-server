@@ -5,7 +5,7 @@ namespace App
 	enum class ExitCode
 	{
 		ok,
-		badArguments
+		badArgs
 	};
 
 	int toInt(ExitCode exitCode);

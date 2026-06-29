@@ -27,7 +27,7 @@ namespace App
 	{
 		return m_players.contains(playerId);
 	}
-	
+
 	std::optional<int> PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 		const Physics::Timestep& timestep)
 	{
@@ -122,7 +122,7 @@ namespace App
 				return std::nullopt;
 			}
 		}
-		
+
 		int availableId = m_idCounter;
 		m_idCounter = (m_idCounter + 1) % static_cast<int>(Common::maxPlayerCount);
 		return availableId;

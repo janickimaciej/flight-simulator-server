@@ -41,7 +41,7 @@ namespace App
 	private:
 		asio::io_context m_networkThreadIOContext{};
 		asio::ip::udp::socket m_networkThreadSocket;
-		
+
 		asio::io_context m_physicsThreadIOContext{};
 		asio::ip::udp::socket m_physicsThreadSocket;
 
