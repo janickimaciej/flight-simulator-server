@@ -2,7 +2,7 @@
 
 #include "app/playerData.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
 #include "physics/timestamp.hpp"
@@ -35,7 +35,7 @@ namespace App
 
 		bool receiveInitReqOrControlFrame(asio::ip::udp::endpoint& endpoint,
 			Physics::Timestamp& clientTimestamp, UDPFrameType& udpFrameType,
-			Common::AirplaneTypeName& airplaneTypeName, Physics::Timestep& timestep, int& playerId,
+			Common::AirplaneType& airplaneType, Physics::Timestep& timestep, int& playerId,
 			Physics::PlayerInput& playerInput);
 
 	private:

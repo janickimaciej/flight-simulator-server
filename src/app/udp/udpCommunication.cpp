@@ -3,7 +3,7 @@
 #include "app/playerData.hpp"
 #include "app/udp/udpFrameType.hpp"
 #include "app/udp/udpSerializer.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
 #include "physics/timestamp.hpp"
@@ -71,14 +71,14 @@ namespace App
 
 	bool UDPCommunication::receiveInitReqOrControlFrame(asio::ip::udp::endpoint& endpoint,
 		Physics::Timestamp& clientTimestamp, UDPFrameType& udpFrameType,
-		Common::AirplaneTypeName& airplaneTypeName, Physics::Timestep& timestep, int& playerId,
+		Common::AirplaneType& airplaneType, Physics::Timestep& timestep, int& playerId,
 		Physics::PlayerInput& playerInput)
 	{
 		static constexpr std::chrono::seconds timeout(10);
 		return receiveFrameWithTimeout
 		(
 			endpoint,
-			[&clientTimestamp, &udpFrameType, &airplaneTypeName, &timestep, &playerId, &playerInput]
+			[&clientTimestamp, &udpFrameType, &airplaneType, &timestep, &playerId, &playerInput]
 			(std::vector<std::uint8_t> buffer, std::size_t receivedSize)
 			{
 				if (receivedSize == 0)
@@ -91,7 +91,7 @@ namespace App
 					std::vector<std::uint8_t> receivedBuffer(buffer.begin(),
 						buffer.begin() + static_cast<int>(receivedSize));
 					UDPSerializer::deserializeInitReqFrame(receivedBuffer, clientTimestamp,
-						airplaneTypeName);
+						airplaneType);
 					return true;
 				}
 				else if (buffer[0] == toUInt8(UDPFrameType::control))

@@ -158,7 +158,7 @@
     <ClCompile Include="core\app\exitSignal.cpp" />
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
-    <ClCompile Include="core\common\airplaneTypeName.cpp" />
+    <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\terrains\compositeTerrain.cpp" />
@@ -210,7 +210,7 @@
     <ClInclude Include="core\common\airplaneCentersOfMass.hpp" />
     <ClInclude Include="core\common\airplaneCtrl.hpp" />
     <ClInclude Include="core\common\airplaneInfo.hpp" />
-    <ClInclude Include="core\common\airplaneTypeName.hpp" />
+    <ClInclude Include="core\common\airplaneType.hpp" />
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />

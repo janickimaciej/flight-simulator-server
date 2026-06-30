@@ -6,7 +6,7 @@ namespace App
 {
 	struct CommandLineArgs
 	{
-		Common::MapName mapName{};
+		Common::MapName map{};
 		int networkThreadPort{};
 		int physicsThreadPort{};
 

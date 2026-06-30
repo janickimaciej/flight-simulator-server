@@ -13,12 +13,12 @@ namespace App
 			return false;
 		}
 
-		int mapNameIndex = std::stoi(argv[toSizeT(CommandLineArg::map)]);
-		if (mapNameIndex < 0 || mapNameIndex >= Common::mapCount)
+		int mapIndex = std::stoi(argv[toSizeT(CommandLineArg::map)]);
+		if (mapIndex < 0 || mapIndex >= Common::mapCount)
 		{
 			return false;
 		}
-		args.mapName = static_cast<Common::MapName>(mapNameIndex);
+		args.map = static_cast<Common::MapName>(mapIndex);
 
 		static constexpr int minPortValue = 0;
 		static constexpr int maxPortValue = 1 << 16;

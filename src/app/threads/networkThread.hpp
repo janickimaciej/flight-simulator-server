@@ -4,10 +4,16 @@
 #include "app/exitSignal.hpp"
 #include "app/playerManager.hpp"
 #include "app/udp/udpCommunication.hpp"
+#include "common/airplaneType.hpp"
 #include "physics/notification.hpp"
+#include "physics/playerInput.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/spawner.hpp"
+#include "physics/timestamp.hpp"
+#include "physics/timestep.hpp"
+
+#include <asio/asio.hpp>
 
 namespace App
 {
@@ -34,8 +40,7 @@ namespace App
 
 		void kickPlayers();
 		void handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
-			const Physics::Timestamp& clientTimestamp,
-			const Common::AirplaneTypeName& airplaneTypeName);
+			const Physics::Timestamp& clientTimestamp, const Common::AirplaneType& airplaneType);
 		void handleControlFrame(const Physics::Timestamp& clientTimestamp,
 			const Physics::Timestep& timestep, int playerId,
 			const Physics::PlayerInput& playerInput);

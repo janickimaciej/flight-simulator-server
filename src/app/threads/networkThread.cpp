@@ -2,14 +2,9 @@
 
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/airplaneTypeName.hpp"
 #include "common/terrains/maps/maps.hpp"
 #include "physics/airplaneDefinitions.hpp"
 #include "physics/playerInfo.hpp"
-#include "physics/playerInput.hpp"
-#include "physics/timestamp.hpp"
-
-#include <asio/asio.hpp>
 
 #include <optional>
 #include <vector>
@@ -18,8 +13,8 @@ namespace App
 {
 	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args) :
 		m_exitSignal{exitSignal},
-		m_simulationBuffer{-1, args.mapName},
-		m_spawner{*Common::Terrains::maps[toSizeT(args.mapName)]},
+		m_simulationBuffer{-1, args.map},
+		m_spawner{*Common::Terrains::maps[toSizeT(args.map)]},
 		m_udpCommunication{args.networkThreadPort, args.physicsThreadPort}
 	{ }
 
@@ -41,13 +36,13 @@ namespace App
 			asio::ip::udp::endpoint endpoint{};
 			Physics::Timestamp clientTimestamp{};
 			UDPFrameType udpFrameType{};
-			Common::AirplaneTypeName airplaneTypeName{};
+			Common::AirplaneType airplaneType{};
 			Physics::Timestep timestep{};
 			int playerId{};
 			Physics::PlayerInput playerInput{};
 
 			bool received = m_udpCommunication.receiveInitReqOrControlFrame(endpoint,
-				clientTimestamp, udpFrameType, airplaneTypeName, timestep, playerId, playerInput);
+				clientTimestamp, udpFrameType, airplaneType, timestep, playerId, playerInput);
 
 			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
 				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
@@ -64,7 +59,7 @@ namespace App
 
 			if (udpFrameType == UDPFrameType::initReq)
 			{
-				handleInitReqFrame(endpoint, clientTimestamp, airplaneTypeName);
+				handleInitReqFrame(endpoint, clientTimestamp, airplaneType);
 			}
 			else if (udpFrameType == UDPFrameType::control && timestep > m_frameCutoff)
 			{
@@ -85,7 +80,7 @@ namespace App
 	}
 
 	void NetworkThread::handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
-		const Physics::Timestamp& clientTimestamp, const Common::AirplaneTypeName& airplaneTypeName)
+		const Physics::Timestamp& clientTimestamp, const Common::AirplaneType& airplaneType)
 	{
 		std::optional<int> playerId = m_playerManager.getPlayerId(endpoint);
 		if (playerId)
@@ -103,9 +98,9 @@ namespace App
 					Physics::PlayerInput{},
 					Physics::PlayerState
 					{
-						airplaneTypeName,
-						Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialHP,
-						m_spawner.spawn(airplaneTypeName)
+						airplaneType,
+						Physics::airplaneDefinitions[Common::toSizeT(airplaneType)].initialHP,
+						m_spawner.spawn(airplaneType)
 					}
 				};
 				m_simulationBuffer.writeInitFrame(timestep, *playerId, playerInfo);
