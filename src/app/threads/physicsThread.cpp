@@ -77,10 +77,10 @@ namespace App
 
 	void PhysicsThread::sleepIfFuture(const Physics::Timestep& timestep)
 	{
-		Physics::Timestep currentTimestep = m_simulationClock.getTime();
-		while (currentTimestep < timestep)
+		Physics::Timestep currTimestep = m_simulationClock.getTime();
+		while (currTimestep < timestep)
 		{
-			currentTimestep = m_simulationClock.getTime();
+			currTimestep = m_simulationClock.getTime();
 		}
 	}
 }
