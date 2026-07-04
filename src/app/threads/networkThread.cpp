@@ -2,7 +2,7 @@
 
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/terrains/maps/maps.hpp"
+#include "common/maps/maps.hpp"
 #include "physics/airplaneDefinitions.hpp"
 #include "physics/playerInfo.hpp"
 
@@ -14,7 +14,7 @@ namespace App
 	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args) :
 		m_exitSignal{exitSignal},
 		m_simulationBuffer{-1, args.map},
-		m_spawner{*Common::Terrains::maps[toSizeT(args.map)]},
+		m_spawner{*Common::Maps::maps[toSizeT(args.map)]},
 		m_udpCommunication{args.networkThreadPort, args.physicsThreadPort}
 	{ }
 
