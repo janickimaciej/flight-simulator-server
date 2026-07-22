@@ -21,6 +21,7 @@ namespace App
 	{
 	public:
 		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args);
+
 		void start();
 
 	private:

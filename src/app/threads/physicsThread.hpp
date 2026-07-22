@@ -18,6 +18,7 @@ namespace App
 		PhysicsThread(ExitSignal& exitSignal, const Physics::SimulationClock& simulationClock,
 			Physics::SimulationBuffer& simulationBuffer, Physics::Notification& notification,
 			UDPCommunication& udpCommunication, PlayerManager& playerManager);
+
 		void join();
 
 	private:
