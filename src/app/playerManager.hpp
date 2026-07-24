@@ -1,13 +1,10 @@
 #pragma once
 
 #include "app/playerData.hpp"
-#include "common/config.hpp"
 #include "physics/timestep.hpp"
 
 #include <asio/asio.hpp>
 
-#include <array>
-#include <list>
 #include <mutex>
 #include <optional>
 #include <unordered_map>

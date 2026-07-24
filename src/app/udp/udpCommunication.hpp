@@ -10,6 +10,7 @@
 
 #include <asio/asio.hpp>
 
+#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <functional>

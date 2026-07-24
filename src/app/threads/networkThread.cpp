@@ -2,9 +2,11 @@
 
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
+#include "common/config.hpp"
 #include "common/maps/maps.hpp"
 #include "physics/airplaneDefinitions.hpp"
 #include "physics/playerInfo.hpp"
+#include "physics/playerState.hpp"
 
 #include <optional>
 #include <vector>

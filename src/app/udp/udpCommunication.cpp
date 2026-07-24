@@ -1,24 +1,9 @@
 #include "app/udp/udpCommunication.hpp"
 
-#include "app/playerData.hpp"
-#include "app/udp/udpFrameType.hpp"
 #include "app/udp/udpSerializer.hpp"
-#include "common/airplaneType.hpp"
-#include "physics/playerInfo.hpp"
-#include "physics/playerInput.hpp"
-#include "physics/timestamp.hpp"
-#include "physics/timestep.hpp"
 
-#include <asio/asio.hpp>
-
-#include <chrono>
-#include <cstddef>
-#include <cstdint>
 #include <exception>
-#include <functional>
-#include <memory>
-#include <unordered_map>
-#include <vector>
+#include <utility>
 
 namespace App
 {
