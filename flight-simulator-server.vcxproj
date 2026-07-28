@@ -160,7 +160,6 @@
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\mapName.cpp" />
-    <ClCompile Include="core\common\maps\airportMap.cpp" />
     <ClCompile Include="core\common\maps\islandMap.cpp" />
     <ClCompile Include="core\common\maps\map.cpp" />
     <ClCompile Include="core\common\state.cpp" />
@@ -218,7 +217,6 @@
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
-    <ClInclude Include="core\common\maps\airportMap.hpp" />
     <ClInclude Include="core\common\maps\islandMap.hpp" />
     <ClInclude Include="core\common\maps\map.hpp" />
     <ClInclude Include="core\common\maps\maps.hpp" />

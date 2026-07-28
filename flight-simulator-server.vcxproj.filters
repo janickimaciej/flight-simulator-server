@@ -39,7 +39,6 @@
     <ClCompile Include="core\physics\timestamp.cpp" />
     <ClCompile Include="core\physics\timestep.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
-    <ClCompile Include="core\common\maps\airportMap.cpp" />
     <ClCompile Include="core\common\maps\islandMap.cpp" />
     <ClCompile Include="core\common\maps\map.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
@@ -116,7 +115,6 @@
     <ClInclude Include="core\physics\timestamp.hpp" />
     <ClInclude Include="core\physics\timestep.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />
-    <ClInclude Include="core\common\maps\airportMap.hpp" />
     <ClInclude Include="core\common\maps\islandMap.hpp" />
     <ClInclude Include="core\common\maps\map.hpp" />
     <ClInclude Include="core\common\maps\maps.hpp" />
