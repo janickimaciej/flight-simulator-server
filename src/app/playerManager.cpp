@@ -26,7 +26,7 @@ namespace App
 	std::optional<int> PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 		const Physics::Timestep& timestep)
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		std::optional<int> newPlayerId = getAvailableId();
 		if (newPlayerId)
@@ -41,27 +41,23 @@ namespace App
 				}});
 		}
 
-		m_mutex.unlock();
-
 		return newPlayerId;
 	}
 
 	void PlayerManager::bumpPlayer(int playerId, const Physics::Timestep& timestep)
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		if (!m_players.at(playerId).keepAliveLock)
 		{
 			static const Physics::Timestep timeout{10, 0};
 			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
 		}
-
-		m_mutex.unlock();
 	}
 
 	std::vector<int> PlayerManager::kickPlayers(const Physics::Timestep& timestep)
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		std::vector<int> kickedPlayerIds{};
 		for (const std::pair<const int, PlayerData>& player : m_players)
@@ -76,25 +72,21 @@ namespace App
 			m_players.erase(kickedPlayerId);
 		}
 
-		m_mutex.unlock();
-
 		return kickedPlayerIds;
 	}
 
 	std::unordered_map<int, PlayerData> PlayerManager::getPlayers() const
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		std::unordered_map<int, PlayerData> players = m_players;
-
-		m_mutex.unlock();
 
 		return players;
 	}
 
 	void PlayerManager::killPlayer(int playerId, const Physics::Timestep& timestep)
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		if (m_players.contains(playerId) && !m_players.at(playerId).keepAliveLock)
 		{
@@ -102,8 +94,6 @@ namespace App
 			static const Physics::Timestep timeout{5, 0};
 			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
 		}
-
-		m_mutex.unlock();
 	}
 
 	std::optional<int> PlayerManager::getAvailableId()
