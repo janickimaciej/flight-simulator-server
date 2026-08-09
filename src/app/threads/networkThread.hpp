@@ -29,7 +29,7 @@ namespace App
 
 		Physics::SimulationClock m_simulationClock{};
 		Physics::SimulationBuffer m_simulationBuffer;
-		Physics::Spawner m_spawner;
+		Physics::Spawner m_spawner{};
 
 		Physics::Notification m_notification{m_simulationClock};
 		Physics::Timestep m_frameCutoff{};

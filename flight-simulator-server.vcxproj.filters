@@ -11,16 +11,18 @@
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\app\exitSignal.cpp" />
+    <ClCompile Include="core\common\terrans\maps.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
     <ClCompile Include="core\common\terrains\valueNoise.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
-    <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\transformable.cpp" />
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
+    <ClInclude Include="core\physics\collisions\maps\islandMap.cpp" />
+    <ClInclude Include="core\physics\collisions\maps\map.cpp" />
     <ClCompile Include="core\physics\modelDynamics\airplaneDynamics.cpp" />
     <ClCompile Include="core\physics\modelDynamics\bulletDynamics.cpp" />
     <ClCompile Include="core\physics\modelDynamics\rigidBodyDynamics.cpp" />
@@ -39,8 +41,6 @@
     <ClCompile Include="core\physics\timestamp.cpp" />
     <ClCompile Include="core\physics\timestep.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
-    <ClCompile Include="core\common\maps\islandMap.cpp" />
-    <ClCompile Include="core\common\maps\map.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
     <ClCompile Include="core\common\terrains\operators.cpp" />
     <ClCompile Include="core\common\terrains\plateau.cpp" />
@@ -89,6 +89,8 @@
     <ClInclude Include="core\physics\collisions\airplane.hpp" />
     <ClInclude Include="core\physics\collisions\collisionTest.hpp" />
     <ClInclude Include="core\physics\collisions\ellipsoid.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\map.hpp" />
     <ClInclude Include="core\physics\modelDynamics\airplaneDynamics.hpp" />
     <ClInclude Include="core\physics\modelDynamics\bulletDynamics.hpp" />
     <ClInclude Include="core\physics\modelDynamics\rigidBodyDynamics.hpp" />
@@ -115,14 +117,12 @@
     <ClInclude Include="core\physics\timestamp.hpp" />
     <ClInclude Include="core\physics\timestep.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />
-    <ClInclude Include="core\common\maps\islandMap.hpp" />
-    <ClInclude Include="core\common\maps\map.hpp" />
-    <ClInclude Include="core\common\maps\maps.hpp" />
     <ClInclude Include="core\common\terrains\constant.hpp" />
     <ClInclude Include="core\common\terrains\operators.hpp" />
     <ClInclude Include="core\common\terrains\plateau.hpp" />
     <ClInclude Include="core\common\terrains\product.hpp" />
     <ClInclude Include="core\common\terrains\sum.hpp" />
+    <ClInclude Include="core\common\terrains\maps.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -159,12 +159,10 @@
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
-    <ClCompile Include="core\common\mapName.cpp" />
-    <ClCompile Include="core\common\maps\islandMap.cpp" />
-    <ClCompile Include="core\common\maps\map.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
+    <ClCompile Include="core\common\terrains\maps.cpp" />
     <ClCompile Include="core\common\terrains\operators.cpp" />
     <ClCompile Include="core\common\terrains\plateau.cpp" />
     <ClCompile Include="core\common\terrains\product.cpp" />
@@ -176,6 +174,8 @@
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
     <ClCompile Include="core\physics\atmosphere.cpp" />
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\map.cpp" />
     <ClCompile Include="core\physics\dayNightCycle.cpp" />
     <ClCompile Include="core\physics\flightCtrl.cpp" />
     <ClCompile Include="core\physics\modelDynamics\airplaneDynamics.cpp" />
@@ -217,13 +217,11 @@
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
-    <ClInclude Include="core\common\maps\islandMap.hpp" />
-    <ClInclude Include="core\common\maps\map.hpp" />
-    <ClInclude Include="core\common\maps\maps.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
     <ClInclude Include="core\common\state.hpp" />
     <ClInclude Include="core\common\terrains\constant.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
+    <ClInclude Include="core\common\terrains\maps.hpp" />
     <ClInclude Include="core\common\terrains\operators.hpp" />
     <ClInclude Include="core\common\terrains\plateau.hpp" />
     <ClInclude Include="core\common\terrains\product.hpp" />
@@ -247,6 +245,8 @@
     <ClInclude Include="core\physics\collisions\airplane.hpp" />
     <ClInclude Include="core\physics\collisions\collisionTest.hpp" />
     <ClInclude Include="core\physics\collisions\ellipsoid.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\map.hpp" />
     <ClInclude Include="core\physics\dayNightCycle.hpp" />
     <ClInclude Include="core\physics\flightCtrl.hpp" />
     <ClInclude Include="core\physics\modelDynamics\airplaneDynamics.hpp" />
