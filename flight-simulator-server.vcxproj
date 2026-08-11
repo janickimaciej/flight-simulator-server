@@ -159,6 +159,7 @@
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
+    <ClCompile Include="core\common\frame.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
@@ -170,7 +171,6 @@
     <ClCompile Include="core\common\terrains\valueNoise.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
-    <ClCompile Include="core\common\transformable.cpp" />
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
     <ClCompile Include="core\physics\atmosphere.cpp" />
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
@@ -216,6 +216,7 @@
     <ClInclude Include="core\common\airplaneType.hpp" />
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
+    <ClInclude Include="core\common\frame.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
     <ClInclude Include="core\common\state.hpp" />
@@ -230,7 +231,6 @@
     <ClInclude Include="core\common\terrains\valueNoise.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
     <ClInclude Include="core\common\terrains\waveZ.hpp" />
-    <ClInclude Include="core\common\transformable.hpp" />
     <ClInclude Include="core\common\valueNoise.hpp" />
     <ClInclude Include="core\physics\airplaneDefinition.hpp" />
     <ClInclude Include="core\physics\airplaneDefinitions.hpp" />
