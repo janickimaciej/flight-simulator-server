@@ -12,17 +12,13 @@
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\app\exitSignal.cpp" />
     <ClCompile Include="core\common\frame.cpp" />
-    <ClCompile Include="core\common\terrans\maps.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
-    <ClCompile Include="core\common\terrains\valueNoise.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
-    <ClInclude Include="core\physics\collisions\maps\islandMap.cpp" />
-    <ClInclude Include="core\physics\collisions\maps\map.cpp" />
     <ClCompile Include="core\physics\modelDynamics\airplaneDynamics.cpp" />
     <ClCompile Include="core\physics\modelDynamics\bulletDynamics.cpp" />
     <ClCompile Include="core\physics\modelDynamics\rigidBodyDynamics.cpp" />
@@ -46,6 +42,10 @@
     <ClCompile Include="core\common\terrains\plateau.cpp" />
     <ClCompile Include="core\common\terrains\product.cpp" />
     <ClCompile Include="core\common\terrains\sum.cpp" />
+    <ClCompile Include="core\common\terrains\maps.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\map.cpp" />
+    <ClCompile Include="core\common\terrains\noise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\commandLineArg.hpp" />
@@ -65,7 +65,6 @@
     <ClInclude Include="core\app\exitSignal.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
     <ClInclude Include="core\common\terrains\terrain.hpp" />
-    <ClInclude Include="core\common\terrains\valueNoise.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
     <ClInclude Include="core\common\terrains\waveZ.hpp" />
     <ClInclude Include="core\common\airplaneCentersOfMass.hpp" />
@@ -78,7 +77,6 @@
     <ClInclude Include="core\common\mapName.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
     <ClInclude Include="core\common\state.hpp" />
-    <ClInclude Include="core\common\valueNoise.hpp" />
     <ClInclude Include="core\physics\airplaneParams\airplaneParams.hpp" />
     <ClInclude Include="core\physics\airplaneParams\fuselageParams.hpp" />
     <ClInclude Include="core\physics\airplaneParams\inertiaParams.hpp" />
@@ -123,6 +121,10 @@
     <ClInclude Include="core\common\terrains\product.hpp" />
     <ClInclude Include="core\common\terrains\sum.hpp" />
     <ClInclude Include="core\common\terrains\maps.hpp" />
+    <ClInclude Include="core\common\terrains\noise.hpp" />
+    <ClInclude Include="core\common\noises\noise.hpp" />
+    <ClInclude Include="core\common\noises\perlinNoise.hpp" />
+    <ClInclude Include="core\common\noises\valueNoise.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
