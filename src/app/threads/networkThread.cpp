@@ -29,7 +29,7 @@ namespace App
 
 	void NetworkThread::mainLoop()
 	{
-		while (!m_exitSignal.shouldStop())
+		while (!m_exitSignal.exiting())
 		{
 			kickPlayers();
 
