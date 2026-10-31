@@ -6,7 +6,7 @@
 #include "physics/notification.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
-#include "physics/timestep.hpp"
+#include "physics/simulationStep.hpp"
 
 #include <thread>
 
@@ -34,7 +34,7 @@ namespace App
 		PlayerManager& m_playerManager;
 
 		void start();
-		void mainLoop(const Physics::Timestep& initialTimestep);
-		void sleepIfFuture(const Physics::Timestep& timestep);
+		void mainLoop(const Physics::SimulationStep& initialSimulationStep);
+		void sleepIfFuture(const Physics::SimulationStep& simulationStep);
 	};
 }

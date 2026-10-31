@@ -33,47 +33,47 @@ namespace App
 
 	void PhysicsThread::start()
 	{
-		Physics::Timestep initialTimestep = m_simulationClock.getTime();
+		Physics::SimulationStep initialSimulationStep = m_simulationClock.getTime();
 
-		m_simulationBuffer.update(initialTimestep);
+		m_simulationBuffer.update(initialSimulationStep);
 
-		mainLoop(initialTimestep);
+		mainLoop(initialSimulationStep);
 	}
 
-	void PhysicsThread::mainLoop(const Physics::Timestep& initialTimestep)
+	void PhysicsThread::mainLoop(const Physics::SimulationStep& initialSimulationStep)
 	{
-		Physics::Timestep timestep = initialTimestep;
+		Physics::SimulationStep simulationStep = initialSimulationStep;
 		while (!m_exitSignal.exiting())
 		{
-			timestep = timestep.next();
-			m_notification.getNotification(timestep);
-			sleepIfFuture(timestep);
+			simulationStep = simulationStep.next();
+			m_notification.getNotification(simulationStep);
+			sleepIfFuture(simulationStep);
 
-			m_simulationBuffer.update(timestep);
+			m_simulationBuffer.update(simulationStep);
 
-			if (timestep.step == 0)
+			if (simulationStep.step == 0)
 			{
 				std::unordered_map<int, Physics::PlayerInfo> playerInfos =
-					m_simulationBuffer.getPlayerInfos(timestep);
+					m_simulationBuffer.getPlayerInfos(simulationStep);
 				for (const std::pair<const int, Physics::PlayerInfo>& playerInfo : playerInfos)
 				{
 					if (playerInfo.second.state.hp == 0)
 					{
-						m_playerManager.killPlayer(playerInfo.first, timestep);
+						m_playerManager.killPlayer(playerInfo.first, simulationStep);
 					}
 				}
-				m_udpCommunication.broadcastStateFrame(m_playerManager.getPlayers(), timestep,
+				m_udpCommunication.broadcastStateFrame(m_playerManager.getPlayers(), simulationStep,
 					playerInfos);
 			}
 		}
 	}
 
-	void PhysicsThread::sleepIfFuture(const Physics::Timestep& timestep)
+	void PhysicsThread::sleepIfFuture(const Physics::SimulationStep& simulationStep)
 	{
-		Physics::Timestep currTimestep = m_simulationClock.getTime();
-		while (currTimestep < timestep)
+		Physics::SimulationStep currSimulationStep = m_simulationClock.getTime();
+		while (currSimulationStep < simulationStep)
 		{
-			currTimestep = m_simulationClock.getTime();
+			currSimulationStep = m_simulationClock.getTime();
 		}
 	}
 }

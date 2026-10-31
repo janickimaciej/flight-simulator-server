@@ -5,8 +5,8 @@
 #include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
+#include "physics/simulationStep.hpp"
 #include "physics/timestamp.hpp"
-#include "physics/timestep.hpp"
 
 #include <asio/asio.hpp>
 
@@ -28,16 +28,17 @@ namespace App
 		void sendInitResFrame(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestamp& clientTimestamp, int playerId);
 		void broadcastControlFrame(const std::unordered_map<int, PlayerData>& playerDatas,
-			const Physics::Timestamp& clientTimestamp, const Physics::Timestep& timestep,
-			int playerId, const Physics::PlayerInput& playerInput);
+			const Physics::Timestamp& clientTimestamp,
+			const Physics::SimulationStep& simulationStep, int playerId,
+			const Physics::PlayerInput& playerInput);
 		void broadcastStateFrame(const std::unordered_map<int, PlayerData>& playerDatas,
-			const Physics::Timestep& timestep,
+			const Physics::SimulationStep& simulationStep,
 			const std::unordered_map<int, Physics::PlayerInfo>& playerInfos);
 
 		bool receiveInitReqOrControlFrame(asio::ip::udp::endpoint& endpoint,
 			Physics::Timestamp& clientTimestamp, UDPFrameType& udpFrameType,
-			Common::AirplaneType& airplaneType, Physics::Timestep& timestep, int& playerId,
-			Physics::PlayerInput& playerInput);
+			Common::AirplaneType& airplaneType, Physics::SimulationStep& simulationStep,
+			int& playerId, Physics::PlayerInput& playerInput);
 
 	private:
 		asio::io_context m_networkThreadIOContext{};

@@ -10,8 +10,8 @@
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/spawner.hpp"
+#include "physics/simulationStep.hpp"
 #include "physics/timestamp.hpp"
-#include "physics/timestep.hpp"
 
 #include <asio/asio.hpp>
 
@@ -32,7 +32,7 @@ namespace App
 		Physics::Spawner m_spawner{};
 
 		Physics::Notification m_notification{m_simulationClock};
-		Physics::Timestep m_frameCutoff{};
+		Physics::SimulationStep m_frameCutoff{};
 		UDPCommunication m_udpCommunication;
 
 		PlayerManager m_playerManager{};
@@ -43,7 +43,7 @@ namespace App
 		void handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestamp& clientTimestamp, const Common::AirplaneType& airplaneType);
 		void handleControlFrame(const Physics::Timestamp& clientTimestamp,
-			const Physics::Timestep& timestep, int playerId,
+			const Physics::SimulationStep& simulationStep, int playerId,
 			const Physics::PlayerInput& playerInput);
 	};
 }

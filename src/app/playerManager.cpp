@@ -24,19 +24,19 @@ namespace App
 	}
 
 	std::optional<int> PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
-		const Physics::Timestep& timestep)
+		const Physics::SimulationStep& simulationStep)
 	{
 		std::scoped_lock lock{m_mutex};
 
 		std::optional<int> newPlayerId = getAvailableId();
 		if (newPlayerId)
 		{
-			static const Physics::Timestep timeout{10, 0};
+			static const Physics::SimulationStep timeout{10, 0};
 			m_players.insert({*newPlayerId,
 				PlayerData
 				{
 					endpoint,
-					timestep + timeout,
+					simulationStep + timeout,
 					false
 				}});
 		}
@@ -44,25 +44,25 @@ namespace App
 		return newPlayerId;
 	}
 
-	void PlayerManager::bumpPlayer(int playerId, const Physics::Timestep& timestep)
+	void PlayerManager::bumpPlayer(int playerId, const Physics::SimulationStep& simulationStep)
 	{
 		std::scoped_lock lock{m_mutex};
 
 		if (!m_players.at(playerId).keepAliveLock)
 		{
-			static const Physics::Timestep timeout{10, 0};
-			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
+			static const Physics::SimulationStep timeout{10, 0};
+			m_players.at(playerId).keepAliveSimulationStep = simulationStep + timeout;
 		}
 	}
 
-	std::vector<int> PlayerManager::kickPlayers(const Physics::Timestep& timestep)
+	std::vector<int> PlayerManager::kickPlayers(const Physics::SimulationStep& simulationStep)
 	{
 		std::scoped_lock lock{m_mutex};
 
 		std::vector<int> kickedPlayerIds{};
 		for (const std::pair<const int, PlayerData>& player : m_players)
 		{
-			if (timestep > player.second.keepAliveTimestep)
+			if (simulationStep > player.second.keepAliveSimulationStep)
 			{
 				kickedPlayerIds.push_back(player.first);
 			}
@@ -84,15 +84,15 @@ namespace App
 		return players;
 	}
 
-	void PlayerManager::killPlayer(int playerId, const Physics::Timestep& timestep)
+	void PlayerManager::killPlayer(int playerId, const Physics::SimulationStep& simulationStep)
 	{
 		std::scoped_lock lock{m_mutex};
 
 		if (m_players.contains(playerId) && !m_players.at(playerId).keepAliveLock)
 		{
 			m_players.at(playerId).keepAliveLock = true;
-			static const Physics::Timestep timeout{5, 0};
-			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
+			static const Physics::SimulationStep timeout{5, 0};
+			m_players.at(playerId).keepAliveSimulationStep = simulationStep + timeout;
 		}
 	}
 

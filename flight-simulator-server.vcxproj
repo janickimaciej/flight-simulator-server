@@ -189,9 +189,9 @@
     <ClCompile Include="core\physics\simulationBuffer.cpp" />
     <ClCompile Include="core\physics\simulationBufferElement.cpp" />
     <ClCompile Include="core\physics\simulationClock.cpp" />
+    <ClCompile Include="core\physics\simulationStep.cpp" />
     <ClCompile Include="core\physics\spawner.cpp" />
     <ClCompile Include="core\physics\timestamp.cpp" />
-    <ClCompile Include="core\physics\timestep.cpp" />
     <ClCompile Include="src\app\commandLineArg.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
     <ClCompile Include="src\app\exitCode.cpp" />
@@ -268,9 +268,9 @@
     <ClInclude Include="core\physics\simulationBufferElement.hpp" />
     <ClInclude Include="core\physics\simulationBufferPlayer.hpp" />
     <ClInclude Include="core\physics\simulationClock.hpp" />
+    <ClInclude Include="core\physics\simulationStep.hpp" />
     <ClInclude Include="core\physics\spawner.hpp" />
     <ClInclude Include="core\physics\timestamp.hpp" />
-    <ClInclude Include="core\physics\timestep.hpp" />
     <ClInclude Include="src\app\commandLineArg.hpp" />
     <ClInclude Include="src\app\exitCode.hpp" />
     <ClInclude Include="src\app\playerData.hpp" />

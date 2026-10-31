@@ -2,7 +2,6 @@
 
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/config.hpp"
 #include "physics/airplaneDefinitions.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerState.hpp"
@@ -37,16 +36,17 @@ namespace App
 			Physics::Timestamp clientTimestamp{};
 			UDPFrameType udpFrameType{};
 			Common::AirplaneType airplaneType{};
-			Physics::Timestep timestep{};
+			Physics::SimulationStep simulationStep{};
 			int playerId{};
 			Physics::PlayerInput playerInput{};
 
 			bool received = m_udpCommunication.receiveInitReqOrControlFrame(endpoint,
-				clientTimestamp, udpFrameType, airplaneType, timestep, playerId, playerInput);
+				clientTimestamp, udpFrameType, airplaneType, simulationStep, playerId, playerInput);
 
-			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
-				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
-			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
+			static constexpr Physics::SimulationStep frameAgeCutoffOffset{0,
+				static_cast<unsigned int>(Physics::SimulationStep::stepsPerSecond * 0.9f)};
+			Physics::SimulationStep frameAgeCutoff =
+				m_simulationClock.getTime() - frameAgeCutoffOffset;
 			if (m_frameCutoff < frameAgeCutoff)
 			{
 				m_frameCutoff = frameAgeCutoff;
@@ -61,21 +61,21 @@ namespace App
 			{
 				handleInitReqFrame(endpoint, clientTimestamp, airplaneType);
 			}
-			else if (udpFrameType == UDPFrameType::control && timestep > m_frameCutoff)
+			else if (udpFrameType == UDPFrameType::control && simulationStep > m_frameCutoff)
 			{
-				handleControlFrame(clientTimestamp, timestep, playerId, playerInput);
+				handleControlFrame(clientTimestamp, simulationStep, playerId, playerInput);
 			}
 		}
 	}
 
 	void NetworkThread::kickPlayers()
 	{
-		Physics::Timestep timestep = m_simulationClock.getTime();
-		std::vector<int> kickedPlayers = m_playerManager.kickPlayers(timestep);
+		Physics::SimulationStep simulationStep = m_simulationClock.getTime();
+		std::vector<int> kickedPlayers = m_playerManager.kickPlayers(simulationStep);
 		if (!kickedPlayers.empty())
 		{
-			m_simulationBuffer.kickPlayers(kickedPlayers, timestep);
-			m_notification.setNotification(timestep, false);
+			m_simulationBuffer.kickPlayers(kickedPlayers, simulationStep);
+			m_notification.setNotification(simulationStep, false);
 		}
 	}
 
@@ -89,8 +89,8 @@ namespace App
 		}
 		else
 		{
-			Physics::Timestep timestep = m_simulationClock.getTime();
-			playerId = m_playerManager.addNewPlayer(endpoint, timestep);
+			Physics::SimulationStep simulationStep = m_simulationClock.getTime();
+			playerId = m_playerManager.addNewPlayer(endpoint, simulationStep);
 			if (playerId)
 			{
 				Physics::PlayerInfo playerInfo
@@ -103,24 +103,25 @@ namespace App
 						m_spawner.spawn(airplaneType)
 					}
 				};
-				m_simulationBuffer.writeInitFrame(timestep, *playerId, playerInfo);
-				m_notification.setNotification(timestep, false);
+				m_simulationBuffer.writeInitFrame(simulationStep, *playerId, playerInfo);
+				m_notification.setNotification(simulationStep, false);
 				m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, *playerId);
 			}
 		}
 	}
 
 	void NetworkThread::handleControlFrame(const Physics::Timestamp& clientTimestamp,
-		const Physics::Timestep& timestep, int playerId, const Physics::PlayerInput& playerInput)
+		const Physics::SimulationStep& simulationStep, int playerId,
+		const Physics::PlayerInput& playerInput)
 	{
 		if (!m_playerManager.isPlayerIdValid(playerId))
 		{
 			return;
 		}
-		m_simulationBuffer.writeControlFrame(timestep, playerId, playerInput);
-				m_notification.setNotification(timestep, false);
+		m_simulationBuffer.writeControlFrame(simulationStep, playerId, playerInput);
+				m_notification.setNotification(simulationStep, false);
 		m_udpCommunication.broadcastControlFrame(m_playerManager.getPlayers(),
-			clientTimestamp, timestep, playerId, playerInput);
+			clientTimestamp, simulationStep, playerId, playerInput);
 		m_playerManager.bumpPlayer(playerId, m_simulationClock.getTime());
 	}
 }

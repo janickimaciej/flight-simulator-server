@@ -1,7 +1,7 @@
 #pragma once
 
 #include "app/playerData.hpp"
-#include "physics/timestep.hpp"
+#include "physics/simulationStep.hpp"
 
 #include <asio/asio.hpp>
 
@@ -18,11 +18,11 @@ namespace App
 		std::optional<int> getPlayerId(const asio::ip::udp::endpoint& endpoint) const;
 		bool isPlayerIdValid(int playerId) const;
 		std::optional<int> addNewPlayer(const asio::ip::udp::endpoint& endpoint,
-			const Physics::Timestep& timestep);
-		void bumpPlayer(int playerId, const Physics::Timestep& timestep);
-		std::vector<int> kickPlayers(const Physics::Timestep& timestep);
+			const Physics::SimulationStep& simulationStep);
+		void bumpPlayer(int playerId, const Physics::SimulationStep& simulationStep);
+		std::vector<int> kickPlayers(const Physics::SimulationStep& simulationStep);
 		std::unordered_map<int, PlayerData> getPlayers() const;
-		void killPlayer(int playerId, const Physics::Timestep& timestep);
+		void killPlayer(int playerId, const Physics::SimulationStep& simulationStep);
 
 	private:
 		std::unordered_map<int, PlayerData> m_players{};

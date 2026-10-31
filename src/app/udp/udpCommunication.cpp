@@ -28,12 +28,12 @@ namespace App
 
 	void UDPCommunication::broadcastControlFrame(
 		const std::unordered_map<int, PlayerData>& playerDatas,
-		const Physics::Timestamp& clientTimestamp, const Physics::Timestep& timestep, int playerId,
-		const Physics::PlayerInput& playerInput)
+		const Physics::Timestamp& clientTimestamp, const Physics::SimulationStep& simulationStep,
+		int playerId, const Physics::PlayerInput& playerInput)
 	{
 		std::vector<std::uint8_t> buffer{};
 		UDPSerializer::serializeControlFrame(clientTimestamp, Physics::Timestamp::systemNow(),
-			timestep, playerId, playerInput, buffer);
+			simulationStep, playerId, playerInput, buffer);
 
 		for (const std::pair<const int, PlayerData>& player : playerDatas)
 		{
@@ -42,11 +42,12 @@ namespace App
 	}
 
 	void UDPCommunication::broadcastStateFrame(
-		const std::unordered_map<int, PlayerData>& playerDatas, const Physics::Timestep& timestep,
+		const std::unordered_map<int, PlayerData>& playerDatas,
+		const Physics::SimulationStep& simulationStep,
 		const std::unordered_map<int, Physics::PlayerInfo>& playerInfos)
 	{
 		std::vector<std::uint8_t> buffer{};
-		UDPSerializer::serializeStateFrame(timestep, playerInfos, buffer);
+		UDPSerializer::serializeStateFrame(simulationStep, playerInfos, buffer);
 
 		for (const std::pair<const int, PlayerData>& player : playerDatas)
 		{
@@ -56,14 +57,15 @@ namespace App
 
 	bool UDPCommunication::receiveInitReqOrControlFrame(asio::ip::udp::endpoint& endpoint,
 		Physics::Timestamp& clientTimestamp, UDPFrameType& udpFrameType,
-		Common::AirplaneType& airplaneType, Physics::Timestep& timestep, int& playerId,
+		Common::AirplaneType& airplaneType, Physics::SimulationStep& simulationStep, int& playerId,
 		Physics::PlayerInput& playerInput)
 	{
 		static constexpr std::chrono::seconds timeout(10);
 		return receiveFrameWithTimeout
 		(
 			endpoint,
-			[&clientTimestamp, &udpFrameType, &airplaneType, &timestep, &playerId, &playerInput]
+			[&clientTimestamp, &udpFrameType, &airplaneType, &simulationStep, &playerId,
+				&playerInput]
 			(std::vector<std::uint8_t> buffer, std::size_t receivedSize)
 			{
 				if (receivedSize == 0)
@@ -86,7 +88,7 @@ namespace App
 						buffer.begin() + static_cast<int>(receivedSize));
 					Physics::Timestamp serverTimestamp{};
 					UDPSerializer::deserializeControlFrame(receivedBuffer, clientTimestamp,
-						serverTimestamp, timestep, playerId, playerInput);
+						serverTimestamp, simulationStep, playerId, playerInput);
 					return true;
 				}
 				return false;
