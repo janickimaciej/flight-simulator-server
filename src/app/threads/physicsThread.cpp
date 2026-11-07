@@ -51,7 +51,7 @@ namespace App
 
 			m_simulationBuffer.update(simulationStep);
 
-			if (simulationStep.step == 0)
+			if (simulationStep.getStep() == 0)
 			{
 				std::unordered_map<int, Physics::PlayerInfo> playerInfos =
 					m_simulationBuffer.getPlayerInfos(simulationStep);

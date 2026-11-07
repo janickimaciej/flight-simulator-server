@@ -43,7 +43,7 @@ namespace App
 			bool received = m_udpCommunication.receiveInitReqOrControlFrame(endpoint,
 				clientTimestamp, udpFrameType, airplaneType, simulationStep, playerId, playerInput);
 
-			static const Physics::SimulationStep frameAgeCutoffOffset{0,
+			static const Physics::SimulationStep frameAgeCutoffOffset{0u,
 				static_cast<unsigned int>(Physics::SimulationStep::stepsPerSecond * 0.9f)};
 			Physics::SimulationStep frameAgeCutoff =
 				m_simulationClock.getTime() - frameAgeCutoffOffset;
