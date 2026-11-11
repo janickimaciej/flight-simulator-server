@@ -21,7 +21,7 @@ namespace App
 		{
 			[this]
 			{
-				this->start();
+				this->run();
 			}
 		}
 	{ }
@@ -31,7 +31,7 @@ namespace App
 		m_thread.join();
 	}
 
-	void PhysicsThread::start()
+	void PhysicsThread::run()
 	{
 		Physics::SimulationStep initialSimulationStep = m_simulationClock.getTime();
 

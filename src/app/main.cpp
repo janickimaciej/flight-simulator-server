@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 
 	ExitSignal exitSignal{};
 	auto networkThread = std::make_unique<NetworkThread>(exitSignal, args);
-	networkThread->start();
+	networkThread->run();
 
 	return toInt(exitSignal.getExitCode());
 };

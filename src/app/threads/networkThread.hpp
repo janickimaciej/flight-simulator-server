@@ -22,7 +22,7 @@ namespace App
 	public:
 		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args);
 
-		void start();
+		void run();
 
 	private:
 		ExitSignal& m_exitSignal;

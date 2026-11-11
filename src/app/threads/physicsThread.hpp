@@ -33,7 +33,7 @@ namespace App
 
 		PlayerManager& m_playerManager;
 
-		void start();
+		void run();
 		void mainLoop(const Physics::SimulationStep& initialSimulationStep);
 		void sleepIfFuture(const Physics::SimulationStep& simulationStep);
 	};

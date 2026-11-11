@@ -17,7 +17,7 @@ namespace App
 		m_udpCommunication{args.networkThreadPort, args.physicsThreadPort}
 	{ }
 
-	void NetworkThread::start()
+	void NetworkThread::run()
 	{
 		m_frameCutoff = m_simulationClock.getTime();
 		PhysicsThread physicsThread{m_exitSignal, m_simulationClock, m_simulationBuffer,
